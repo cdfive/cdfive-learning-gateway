@@ -1,2 +1,1 @@
-# cdfive-learning-gateway
-Learning project for Spring Cloud Gateway
+A learning project for Spring Cloud Gateway.

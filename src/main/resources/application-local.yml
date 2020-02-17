@@ -1,0 +1,42 @@
+server:
+  port: 9999
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: xxx-app
+          uri: http://localhost:8081
+#          uri: lb://xxx-service
+          predicates:
+            - Path=/app/**
+          filters:
+            - name: ApiSign
+              args:
+                whiteList:
+            - name: JwtAuth
+              args:
+                whiteList:
+                  - "/app/sms/send"
+                  - "/app/user/login"
+                # jwt签名密钥
+                jwtSecret: 123456789
+                # token过期时间7天
+                accessTokenExpire: 604800000
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: false
+    fetch-registry: false
+
+logging:
+  config: classpath:logback-local.xml
