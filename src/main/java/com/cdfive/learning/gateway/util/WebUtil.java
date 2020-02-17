@@ -7,6 +7,7 @@ import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.core.io.buffer.NettyDataBufferFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpRequestDecorator;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -60,7 +61,7 @@ public class WebUtil {
     public static Mono<Void> writeAuthFailResponse(ServerWebExchange exchange, Integer code, String msg) {
         ServerHttpResponse originalResponse = exchange.getResponse();
         originalResponse.setStatusCode(HttpStatus.UNAUTHORIZED);
-        originalResponse.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
+        originalResponse.getHeaders().setContentType(MediaType.APPLICATION_JSON_UTF8);
         byte[] response = ("{\"code\": " + code + ",\"msg\": \"" + msg + "\"}")
                 .getBytes(StandardCharsets.UTF_8);
         DataBuffer buffer = originalResponse.bufferFactory().wrap(response);
