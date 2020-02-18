@@ -75,7 +75,7 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
         result.put("body", body);
 
         ServerHttpRequest request = exchange.getRequest();
-        log.error("[GatewayExceptionHandler]path={},message={}", request.getPath().value(), ex.getMessage());
+        log.error("[GatewayExceptionHandler]{}", request.getPath().value(), ex);
 
         if (exchange.getResponse().isCommitted()) {
             return Mono.error(ex);
@@ -114,6 +114,5 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
         public List<ViewResolver> viewResolvers() {
             return GatewayExceptionHandler.this.viewResolvers;
         }
-
     }
 }
