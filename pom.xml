@@ -18,7 +18,7 @@
         <!-- dependency -->
         <spring.boot.version>2.0.4.RELEASE</spring.boot.version>
         <spring-cloud-dependencies.version>Finchley.SR1</spring-cloud-dependencies.version>
-        <fastjson.version>1.2.60</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <jjwt.version>0.9.1</jjwt.version>
 
         <!-- maven plugin -->
